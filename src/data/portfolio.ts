@@ -10,8 +10,8 @@ export const portfolioData: PortfolioData = {
       "Second-year Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning, with skills in front-end and back-end web development and video editing. Interested in building practical digital solutions, creating engaging video content, and contributing to collaborative technology projects.",
     fullBio: [
       "I am a second-year Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning at A. P. Shah Institute of Technology, affiliated with the University of Mumbai.",
-      "My technical foundation bridges front-end and back-end web development with HTML, CSS, JavaScript, React.js, Node.js, and Tailwind CSS, alongside core programming and automation scripting in Python and Batch File.",
-      "Beyond code, I have practical experience in digital media production with Adobe Premiere Pro, Canva, WordPress, and Wix. As an active volunteer at AWS Cloud Club APSIT, I contribute to cloud-related initiatives, support technical events, and foster collaborative learning across the student community.",
+      "My technical foundation bridges front-end and back-end web development with HTML, CSS, JavaScript, React.js, Node.js, and Tailwind CSS, alongside core programming and database engineering in Python, Java, C programming, SQL, and Batch File automation.",
+      "Beyond code, I have practical experience in digital media production, UI design, and prompting with Adobe Premiere Pro, Canva, Figma, and WordPress. As an active volunteer at AWS Cloud Club APSIT, I contribute to cloud-related initiatives, support technical events, and foster collaborative learning across the student community.",
     ],
     location: "Mumbai, Maharashtra, India",
     email: "phosion10@gmail.com",
@@ -24,21 +24,27 @@ export const portfolioData: PortfolioData = {
   socialLinks: [
     {
       platform: "LinkedIn",
-      url: "https://linkedin.com",
+      url: "https://www.linkedin.com/in/abhishek-mule-ba84332b5/?isSelfProfile=true",
       username: "LinkedIn Profile",
       icon: "Linkedin",
+    },
+    {
+      platform: "GitHub",
+      url: "https://github.com/abhishekmule-ai",
+      username: "abhishekmule-ai",
+      icon: "Github",
+    },
+    {
+      platform: "Instagram",
+      url: "https://www.instagram.com/abhi._.haina/",
+      username: "abhi._.haina",
+      icon: "Instagram",
     },
     {
       platform: "Email",
       url: "mailto:phosion10@gmail.com",
       username: "phosion10@gmail.com",
       icon: "Mail",
-    },
-    {
-      platform: "GitHub",
-      url: "https://github.com",
-      username: "GitHub",
-      icon: "Github",
     },
   ],
 
@@ -55,8 +61,8 @@ export const portfolioData: PortfolioData = {
     },
     {
       label: "Technical Skills",
-      value: "14+",
-      description: "Web dev, Python, video editing & cloud",
+      value: "20+",
+      description: "Web dev, languages, creative tools & cloud",
     },
     {
       label: "Community Activity",
@@ -68,34 +74,38 @@ export const portfolioData: PortfolioData = {
   skills: [
     {
       category: "Web Development",
-      description: "Front-end and back-end technologies for developing responsive, accessible, and functional web applications.",
+      description: "Front-end and back-end technologies, styling frameworks, CMS, and modern deployment platforms.",
       skills: [
-        { name: "React.js", level: "Advanced", featured: true },
-        { name: "Node.js", level: "Intermediate", featured: true },
-        { name: "JavaScript", level: "Advanced", featured: true },
-        { name: "Tailwind CSS", level: "Advanced", featured: true },
         { name: "HTML", level: "Expert", featured: true },
         { name: "CSS", level: "Expert", featured: true },
+        { name: "JavaScript", level: "Advanced", featured: true },
+        { name: "React.js", level: "Advanced", featured: true },
+        { name: "Node.js", level: "Intermediate", featured: true },
+        { name: "Tailwind CSS", level: "Advanced", featured: true },
+        { name: "Wordpress", level: "Intermediate", featured: true },
+        { name: "Netlify", level: "Intermediate", featured: true },
+        { name: "Vercel", level: "Intermediate", featured: true },
       ],
     },
     {
-      category: "Other Languages & Computing",
-      description: "Programming languages and automation scripts for algorithmic logic and computing.",
+      category: "Other Languages",
+      description: "Programming languages, database querying, and automation scripting for algorithmic logic and computing.",
       skills: [
         { name: "Python", level: "Advanced", featured: true },
         { name: "Batch File", level: "Intermediate", featured: true },
-        { name: "AI & Machine Learning", level: "Intermediate", featured: true },
+        { name: "Java", level: "Intermediate", featured: true },
+        { name: "C programming", level: "Intermediate", featured: true },
+        { name: "SQL", level: "Intermediate", featured: true },
       ],
     },
     {
-      category: "Video Editing & Media Tools",
-      description: "Creative multimedia content creation, visual storytelling, and CMS web platforms.",
+      category: "Video Editing",
+      description: "Creative multimedia content creation, visual storytelling, generative AI prompting, and interface design.",
       skills: [
         { name: "Adobe Premiere Pro", level: "Advanced", featured: true },
         { name: "Canva", level: "Expert", featured: true },
-        { name: "Wordpress", level: "Intermediate", featured: true },
-        { name: "Wix", level: "Intermediate" },
         { name: "Prompting", level: "Advanced", featured: true },
+        { name: "Figma", level: "Intermediate", featured: true },
       ],
     },
     {
@@ -173,7 +183,7 @@ export const portfolioData: PortfolioData = {
       description:
         "Collection of high-engagement video edits, visual branding assets, and CMS web designs crafted using Adobe Premiere Pro, Canva, and WordPress.",
       image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
-      tags: ["Adobe Premiere Pro", "Canva", "Wordpress", "Prompting"],
+      tags: ["Adobe Premiere Pro", "Canva", "Wordpress", "Prompting", "Figma"],
       demoUrl: "#",
       githubUrl: "https://github.com",
       featured: true,
@@ -213,6 +223,7 @@ export const portfolioData: PortfolioData = {
     { label: "Education", href: "#education" },
     { label: "Projects", href: "#projects" },
     { label: "Certifications", href: "#certifications" },
+    { label: "Contact", href: "#contact" },
   ],
 
   seo: {
@@ -228,8 +239,18 @@ export const portfolioData: PortfolioData = {
       "Node.js",
       "Tailwind CSS",
       "Python",
+      "Java",
+      "C programming",
+      "SQL",
+      "Batch File",
       "Video Editor",
       "Adobe Premiere Pro",
+      "Canva",
+      "Figma",
+      "Prompting",
+      "Wordpress",
+      "Netlify",
+      "Vercel",
       "AWS Cloud Club APSIT",
       "Mumbai",
     ],

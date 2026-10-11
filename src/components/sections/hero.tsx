@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileDown, ArrowRight, Mail, Sparkles } from "lucide-react";
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/ui/social-icons";
+import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from "@/components/ui/social-icons";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export function Hero() {
@@ -17,6 +17,8 @@ export function Hero() {
         return <GithubIcon className="h-5 w-5" />;
       case "linkedin":
         return <LinkedinIcon className="h-5 w-5" />;
+      case "instagram":
+        return <InstagramIcon className="h-5 w-5" />;
       case "twitter":
         return <TwitterIcon className="h-5 w-5" />;
       case "mail":

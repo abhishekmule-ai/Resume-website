@@ -3,7 +3,7 @@ import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
 import { Mail, ArrowUp } from "lucide-react";
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/ui/social-icons";
+import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from "@/components/ui/social-icons";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
@@ -17,6 +17,8 @@ export function Footer() {
         return <GithubIcon className="h-4 w-4" />;
       case "linkedin":
         return <LinkedinIcon className="h-4 w-4" />;
+      case "instagram":
+        return <InstagramIcon className="h-4 w-4" />;
       case "twitter":
         return <TwitterIcon className="h-4 w-4" />;
       case "mail":

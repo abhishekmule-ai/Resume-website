@@ -10,10 +10,10 @@ export function About() {
 
   const highlights = [
     "Specializing in AI & Machine Learning (CSE B.E.)",
-    "Front-End & Back-End Web Development (React.js, Node.js)",
-    "Modern Styling with Tailwind CSS & Clean HTML/CSS",
-    "Python Programming & System Scripting",
-    "Creative Video Editing (Adobe Premiere Pro & Canva)",
+    "Web Dev: HTML, CSS, JavaScript, React.js, Node.js, Tailwind CSS",
+    "Programming: Python, Java, C programming, SQL, Batch File",
+    "Media & UI: Adobe Premiere Pro, Canva, Figma, Prompting",
+    "Deployment & CMS: Wordpress, Netlify, Vercel",
     "Active Volunteer at AWS Cloud Club APSIT",
   ];
 

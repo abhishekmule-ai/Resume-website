@@ -29,7 +29,7 @@ export function Skills() {
           badge="Expertise"
           title="Technical Skills & Competencies"
           gradientWord="Technical Skills"
-          description="Front-end & back-end web development, Python programming, creative video editing, and core analytical competencies."
+          description="Front-end & back-end web development, Python, Java, C & SQL programming, video editing, and core analytical competencies."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">

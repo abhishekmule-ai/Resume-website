@@ -18,7 +18,6 @@ export function Certifications() {
         <SectionHeading
           badge="Credentials"
           title="Certifications & Accreditations"
-          gradientWord="Accreditations"
           description="Recognized credentials and volunteer accreditations in cloud computing, multimedia production, and web development."
         />
 

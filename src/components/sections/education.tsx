@@ -14,7 +14,6 @@ export function Education() {
         <SectionHeading
           badge="Academics"
           title="Education & Credentials"
-          gradientWord="Education"
           description="Academic foundation and continuous learning that shaped my technical thinking."
         />
 

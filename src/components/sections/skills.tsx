@@ -28,7 +28,6 @@ export function Skills() {
         <SectionHeading
           badge="Expertise"
           title="Technical Skills & Competencies"
-          gradientWord="Technical Skills"
           description="Front-end & back-end web development, Python, Java, C & SQL programming, video editing, and core analytical competencies."
         />
 

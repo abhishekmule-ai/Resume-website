@@ -184,8 +184,7 @@ export const portfolioData: PortfolioData = {
         "Collection of high-engagement video edits, visual branding assets, and CMS web designs crafted using Adobe Premiere Pro, Canva, and WordPress.",
       image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
       tags: ["Adobe Premiere Pro", "Canva", "Wordpress", "Prompting", "Figma"],
-      demoUrl: "#",
-      githubUrl: "https://github.com",
+      demoUrl: "https://drive.google.com/drive/project/1sDko_8WD6bcJ57QCzugjQVvvrm7yfyfU?usp=sharing",
       featured: true,
       metrics: "Creative visual storytelling & multimedia",
     },
@@ -223,7 +222,6 @@ export const portfolioData: PortfolioData = {
     { label: "Education", href: "#education" },
     { label: "Projects", href: "#projects" },
     { label: "Certifications", href: "#certifications" },
-    { label: "Contact", href: "#contact" },
   ],
 
   seo: {

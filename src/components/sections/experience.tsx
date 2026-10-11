@@ -15,7 +15,6 @@ export function Experience() {
         <SectionHeading
           badge="Involvement"
           title="Experience & Activities"
-          gradientWord="Activities"
           description="Contributions to student technology initiatives, cloud activities at AWS Cloud Club APSIT, and collaborative event coordination."
         />
 

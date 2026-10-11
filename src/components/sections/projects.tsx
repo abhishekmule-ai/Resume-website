@@ -6,7 +6,6 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Sparkles } from "lucide-react";
-import { GithubIcon } from "@/components/ui/social-icons";
 
 export function Projects() {
   const { projects } = portfolioData;
@@ -17,7 +16,6 @@ export function Projects() {
         <SectionHeading
           badge="Portfolio"
           title="Featured Projects & Work"
-          gradientWord="Featured Projects"
           description="A selection of web applications, AI & automation workflows, and digital media projects."
         />
 
@@ -90,31 +88,18 @@ export function Projects() {
                 </div>
               </CardContent>
 
-              <CardFooter className="pt-2 border-t border-surface-border/60 justify-between">
-                <div className="flex items-center gap-3">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <GithubIcon className="h-4 w-4" />
-                      Code
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      Live Demo
-                    </a>
-                  )}
-                </div>
+              <CardFooter className="pt-2 border-t border-surface-border/60">
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Click here
+                  </a>
+                )}
               </CardFooter>
             </Card>
           ))}

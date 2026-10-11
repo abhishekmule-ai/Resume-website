@@ -21,8 +21,21 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   const isCenter = align === "center";
 
-  // If gradientWord is provided, highlight that word in the title
+  // If title contains " & ", make both sides have colour grading except "&"
   const renderTitle = () => {
+    if (title.includes(" & ")) {
+      const [first, ...rest] = title.split(" & ");
+      const second = rest.join(" & ");
+      return (
+        <>
+          <span className="text-gradient">{first}</span>
+          {" "}
+          <span className="text-foreground">&amp;</span>
+          {" "}
+          <span className="text-gradient">{second}</span>
+        </>
+      );
+    }
     if (!gradientWord) return title;
     const parts = title.split(gradientWord);
     return (

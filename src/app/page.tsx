@@ -6,7 +6,6 @@ import { Experience } from "@/components/sections/experience";
 import { Education } from "@/components/sections/education";
 import { Projects } from "@/components/sections/projects";
 import { Certifications } from "@/components/sections/certifications";
-import { Contact } from "@/components/sections/contact";
 
 export default function HomePage() {
   return (
@@ -18,7 +17,6 @@ export default function HomePage() {
       <Education />
       <Projects />
       <Certifications />
-      <Contact />
     </div>
   );
 }

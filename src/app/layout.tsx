@@ -3,12 +3,11 @@ import "./globals.css";
 import { portfolioData } from "@/data/portfolio";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { InteractiveWaveBackground } from "@/components/ui/interactive-wave-background";
+import { LiveGeometricBackground } from "@/components/ui/live-geometric-background";
 
 export const metadata: Metadata = {
-  title: portfolioData.seo.title,
+  title: "Resume",
   description: portfolioData.seo.description,
   keywords: portfolioData.seo.keywords,
   authors: [{ name: portfolioData.personal.name }],
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_APP_URL || portfolioData.seo.siteUrl
   ),
   openGraph: {
-    title: portfolioData.seo.title,
+    title: "Resume",
     description: portfolioData.seo.description,
     url: portfolioData.seo.siteUrl,
     siteName: `${portfolioData.personal.name} Portfolio`,
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: portfolioData.seo.title,
+    title: "Resume",
     description: portfolioData.seo.description,
   },
   robots: {
@@ -34,7 +33,10 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
@@ -48,7 +50,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.png" />
+        <title>Resume</title>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <script
           dangerouslySetInnerHTML={{
@@ -71,8 +75,8 @@ export default function RootLayout({
       </head>
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col relative selection:bg-blue-500/30 selection:text-white">
         <ThemeProvider>
-          <InteractiveWaveBackground />
-          <CustomCursor />
+          {/* Live 3D geometric background from reference image (non-responsive to cursor) */}
+          <LiveGeometricBackground />
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-lg"

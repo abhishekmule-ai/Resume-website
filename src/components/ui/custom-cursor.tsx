@@ -13,7 +13,6 @@ interface CustomCursorProps {
 export function CustomCursor({
   enableSpotlight = true,
   enableGlow = true,
-  enableTrail = false,
 }: CustomCursorProps) {
   const [mounted, setMounted] = useState(false);
   const [isSupported, setIsSupported] = useState(false);

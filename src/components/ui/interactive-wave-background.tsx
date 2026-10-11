@@ -231,8 +231,6 @@ export function InteractiveWaveBackground() {
       }
 
       // 3. Update grid vertex positions based on multi-frequency sine waves & cursor reaction
-      const fov = 420;
-      const cameraZ = 280;
 
       for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {

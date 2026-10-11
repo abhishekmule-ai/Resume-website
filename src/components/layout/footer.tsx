@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
 import { Mail, ArrowUp } from "lucide-react";
@@ -31,7 +32,18 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand & copyright */}
           <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
-            <span className="font-semibold text-foreground">{personal.name}</span>
+            <div className="flex items-center gap-2">
+              <div className="relative h-6 w-6 rounded-md bg-zinc-950 border border-white/10 p-0.5 overflow-hidden flex items-center justify-center">
+                <Image
+                  src="/favicon.png"
+                  alt="AM Logo"
+                  width={20}
+                  height={20}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <span className="font-semibold text-foreground">{personal.name}</span>
+            </div>
             <span className="hidden sm:inline text-surface-border">•</span>
             <span>© {currentYear} All rights reserved.</span>
           </div>

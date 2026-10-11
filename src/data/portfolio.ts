@@ -216,7 +216,7 @@ export const portfolioData: PortfolioData = {
   ],
 
   seo: {
-    title: "Abhishek Mule | CSE (AI & ML) Student & Web Developer",
+    title: "Resume",
     description:
       "Official portfolio of Abhishek Mule — Second-year Computer Science Engineering student specializing in AI & ML, web development (React.js, Node.js), video editing, and AWS Cloud Club volunteer in Mumbai.",
     keywords: [

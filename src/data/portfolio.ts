@@ -179,6 +179,17 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       id: "proj-1",
+      title: "Python QR Code Generator & Studio",
+      description:
+        "An interactive web-based QR Code Generator built with Python logic and modern web technologies. Enables instant link-to-QR rendering with dynamic cyber live wallpaper motion, color presets (Gold Obsidian, Cyber Neon, Emerald, Classic B&W), custom color pickers, error correction levels (up to 30% recovery), instant HD PNG download, and direct one-click social sharing to WhatsApp, Instagram, Facebook, and Twitter.",
+      image: "/qr-generator.jpg",
+      tags: ["Python", "JavaScript", "HTML5", "CSS3", "QR Algorithms", "Netlify"],
+      demoUrl: "https://qrgenerator10.netlify.app/",
+      featured: true,
+      metrics: "Live Web App • Python QR Engine",
+    },
+    {
+      id: "proj-2",
       title: "Digital Media & Video Editing Production Reel",
       description:
         "Collection of high-engagement video edits, visual branding assets, and CMS web designs crafted using Adobe Premiere Pro, Canva, and WordPress.",
@@ -249,6 +260,7 @@ export const portfolioData: PortfolioData = {
       "Wordpress",
       "Netlify",
       "Vercel",
+      "QR Code Generator",
       "AWS Cloud Club APSIT",
       "Mumbai",
     ],

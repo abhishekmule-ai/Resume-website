@@ -23,6 +23,8 @@ export function Projects() {
           className={
             projects.length === 1
               ? "max-w-2xl mx-auto w-full"
+              : projects.length === 2
+              ? "grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto w-full"
               : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           }
         >
@@ -34,7 +36,7 @@ export function Projects() {
               {/* Project Image banner */}
               <div
                 className={`relative w-full overflow-hidden bg-surface-elevated border-b border-surface-border ${
-                  projects.length === 1 ? "h-60 sm:h-72" : "h-48"
+                  projects.length <= 2 ? "h-56 sm:h-64" : "h-48"
                 }`}
               >
                 {project.image ? (

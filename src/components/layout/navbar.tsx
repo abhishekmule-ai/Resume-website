@@ -2,180 +2,225 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X, FileDown, Send } from "lucide-react";
-import { portfolioData } from "@/data/portfolio";
+import { Menu, X, FileText, Send } from "lucide-react";
+import { portfolioContent } from "@/data/content";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
-import { MagneticButton } from "@/components/ui/magnetic-button";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { personal, navItems } = portfolioData;
+  const [activeSection, setActiveSection] = useState("");
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const { personal, navItems } = portfolioContent;
 
   useEffect(() => {
     const handleScroll = () => {
+      // Scrolled state for shrinking
       setScrolled(window.scrollY > 20);
+
+      // Scroll progress
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      }
+
+      // Scroll spy logic
+      const sections = navItems.map((item) => item.href.replace("#", ""));
+      const scrollPos = window.scrollY + 140;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const secId = sections[i];
+        const el = document.getElementById(secId);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(secId);
+          break;
+        }
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [navItems]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isOpen]);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-surface-border shadow-lg shadow-black/10 py-3"
-          : "bg-transparent py-5"
+          ? "bg-[#070C1A]/90 dark:bg-[#070C1A]/90 backdrop-blur-md border-b border-[#5CE1FF]/15 py-2.5 shadow-lg shadow-black/40"
+          : "bg-[#070C1A]/70 dark:bg-[#070C1A]/70 backdrop-blur-sm py-4 border-b border-[#5CE1FF]/10"
       }`}
     >
       <Container>
         <div className="flex items-center justify-between">
-          {/* Logo / Brand with AM Monogram */}
+          {/* Left: Mono Brandmark <AM /> with Blinking Cursor + Abhishek Mule */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 font-bold text-lg tracking-tight"
+            className="group flex items-center gap-2.5 text-sm sm:text-base tracking-tight focus-visible:ring-2 focus-visible:ring-volt-lime rounded-md"
+            aria-label="Abhishek Mule Portfolio Home"
           >
-            <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-950 border border-white/15 shadow-md shadow-black/20 group-hover:scale-105 group-hover:border-blue-400/40 transition-all overflow-hidden p-1">
-              <Image
-                src="/favicon.png"
-                alt="AM Logo"
-                width={36}
-                height={36}
-                className="h-full w-full object-contain"
-                priority
-              />
+            <div className="flex items-center gap-1.5 font-mono text-sm px-2.5 py-1 rounded-md bg-[#0F1217] border border-[#5CE1FF]/30 text-[#5CE1FF] shadow-inner group-hover:border-[#1F5BFF] transition-colors">
+              <span className="text-volt-lime font-bold">&lt;AM</span>
+              <span className="text-[#5CE1FF] font-semibold">/&gt;</span>
+              <span className="inline-block w-1.5 h-3.5 bg-volt-lime animate-blink-cursor" />
             </div>
-            <span className="text-foreground group-hover:text-blue-400 transition-colors">
+            <span className="font-display font-bold text-white group-hover:text-[#5CE1FF] transition-colors hidden sm:inline-block">
               {personal.name}
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          {/* Desktop Navigation Links with Scroll-Spy Indicator */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {navItems.map((item) => {
+              const secId = item.href.replace("#", "");
+              const isActive = activeSection === secId;
+
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={`relative px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-wider transition-all duration-200 rounded-md ${
+                    isActive
+                      ? "text-volt-lime"
+                      : "text-[#8B949E] hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <span className="text-[10px] text-[#5CE1FF]/60 mr-1">{item.number}.</span>
+                  {item.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-volt-lime rounded-full shadow-volt-glow" />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Right Action Items: Theme Toggle, Outlined Résumé Pill, Solid Cobalt Get in Touch */}
+          <div className="hidden md:flex items-center gap-2.5">
+            <ThemeToggle />
+
+            {/* Outlined Résumé Pill */}
+            <a
+              href={personal.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#5CE1FF]/30 hover:border-volt-lime font-mono text-xs font-semibold text-white hover:text-volt-lime hover:bg-[#5CE1FF]/5 transition-all shadow-sm"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#5CE1FF]" />
+              <span>Résumé</span>
+            </a>
+
+            {/* Solid Cobalt CTA Pill */}
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-cobalt hover:bg-cobalt-hover text-white font-mono text-xs font-bold transition-all shadow-cobalt hover:shadow-cobalt-lg hover:translate-y-[-1px]"
+            >
+              <Send className="w-3.5 h-3.5" />
+              <span>Get in Touch</span>
+            </a>
+          </div>
+
+          {/* Mobile Right Controls: Theme Toggle + Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <ThemeToggle size="sm" />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg bg-[#0F1217] border border-[#5CE1FF]/25 text-white hover:border-volt-lime transition-colors"
+              aria-label="Toggle Fullscreen Menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X className="h-5 w-5 text-volt-lime" /> : <Menu className="h-5 w-5 text-[#5CE1FF]" />}
+            </button>
+          </div>
+        </div>
+      </Container>
+
+      {/* Thin Scroll Progress Bar on Bottom Edge */}
+      <div
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-cobalt via-[#5CE1FF] to-volt-lime transition-all duration-100 ease-out"
+        style={{ width: `${scrollProgress}%` }}
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      />
+
+      {/* Mobile Full-Screen Overlay Menu with Large Numbered Links */}
+      {isOpen && (
+        <div className="fixed inset-0 top-[53px] z-50 bg-[#070C1A]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-8 animate-in fade-in duration-200">
+          <div className="blueprint-grid absolute inset-0 opacity-15 pointer-events-none" />
+
+          {/* Corner Crosshairs */}
+          <div className="absolute top-4 left-4 text-[#5CE1FF] font-mono text-xs">+</div>
+          <div className="absolute top-4 right-4 text-[#5CE1FF] font-mono text-xs">+</div>
+          <div className="absolute bottom-4 left-4 text-[#5CE1FF] font-mono text-xs">+</div>
+          <div className="absolute bottom-4 right-4 text-[#5CE1FF] font-mono text-xs">+</div>
+
+          <div className="space-y-1 relative z-10 my-auto">
+            <p className="font-mono text-xs text-[#5CE1FF] uppercase tracking-widest mb-4">
+              {"// INDEX NAVIGATION"}
+            </p>
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+                className="group flex items-center justify-between py-3 border-b border-white/10 hover:border-volt-lime transition-colors"
               >
-                {item.label}
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-xs text-volt-lime">{item.number}</span>
+                  <span className="font-display text-2xl font-extrabold text-white group-hover:text-volt-lime transition-colors">
+                    {item.label}
+                  </span>
+                </div>
+                <span className="font-mono text-xs text-[#5CE1FF] opacity-0 group-hover:opacity-100 transition-opacity">
+                  GO →
+                </span>
               </a>
             ))}
-          </nav>
-
-          {/* Desktop Action Buttons, Theme Toggle & Top-Right Logo */}
-          <div className="hidden lg:flex items-center gap-3">
-            <ThemeToggle />
-            <MagneticButton strength={0.25}>
-              <a
-                href={personal.resumeUrl}
-                download
-                className="inline-flex"
-              >
-                <Button variant="outline" size="sm">
-                  <FileDown className="h-4 w-4" />
-                  Resume
-                </Button>
-              </a>
-            </MagneticButton>
-            <MagneticButton strength={0.25}>
-              <a href={`mailto:${personal.email}`} className="inline-flex">
-                <Button variant="primary" size="sm">
-                  <Send className="h-4 w-4" />
-                  Get in Touch
-                </Button>
-              </a>
-            </MagneticButton>
-
-            {/* Top Right Corner Logo Badge */}
-            <Link
-              href="/"
-              className="flex items-center pl-2 ml-1 border-l border-surface-border group"
-              title="AM Logo"
-            >
-              <div className="relative h-9 w-9 rounded-xl bg-zinc-950 border border-white/15 p-1 flex items-center justify-center shadow-sm group-hover:scale-105 group-hover:border-blue-400/50 group-hover:shadow-blue-500/20 transition-all overflow-hidden">
-                <Image
-                  src="/favicon.png"
-                  alt="AM Logo"
-                  width={32}
-                  height={32}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            </Link>
           </div>
 
-          {/* Mobile Actions: Theme Toggle, AM Logo + Menu Button */}
-          <div className="flex lg:hidden items-center gap-2">
-            <ThemeToggle size="sm" />
-            <Link
-              href="/"
-              className="relative h-8 w-8 rounded-lg bg-zinc-950 border border-white/15 p-0.5 flex items-center justify-center shadow-sm"
-              title="AM Logo"
-            >
-              <Image
-                src="/favicon.png"
-                alt="AM Logo"
-                width={28}
-                height={28}
-                className="h-full w-full object-contain"
-              />
-            </Link>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-foreground/5 focus:outline-none"
-              aria-label="Toggle Navigation Menu"
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6 text-foreground" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Dropdown Menu */}
-        {isOpen && (
-          <div className="md:hidden mt-4 pt-4 border-t border-surface-border bg-surface-elevated/95 backdrop-blur-xl rounded-2xl p-4 shadow-xl space-y-2">
-            <nav className="flex flex-col space-y-1">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-            <div className="pt-3 border-t border-surface-border flex flex-col gap-2">
+          {/* Mobile Menu Action Dock */}
+          <div className="relative z-10 pt-4 flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <a
                 href={personal.resumeUrl}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="w-full"
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-[#5CE1FF]/40 bg-[#0F1217] font-mono text-xs font-semibold text-white hover:border-volt-lime"
               >
-                <Button variant="outline" size="sm" className="w-full">
-                  <FileDown className="h-4 w-4" />
-                  Download Resume
-                </Button>
+                <FileText className="w-4 h-4 text-[#5CE1FF]" />
+                Résumé PDF
               </a>
               <a
-                href={`mailto:${personal.email}`}
+                href="#contact"
                 onClick={() => setIsOpen(false)}
-                className="w-full"
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-cobalt font-mono text-xs font-bold text-white shadow-cobalt"
               >
-                <Button variant="primary" size="sm" className="w-full">
-                  <Send className="h-4 w-4" />
-                  Get in Touch
-                </Button>
+                <Send className="w-4 h-4" />
+                Contact
               </a>
             </div>
+            <div className="text-center">
+              <span className="font-mono text-[11px] text-[#8B949E]">
+                MUMBAI · 2ND YEAR CSE (AI &amp; ML)
+              </span>
+            </div>
           </div>
-        )}
-      </Container>
+        </div>
+      )}
     </header>
   );
 }

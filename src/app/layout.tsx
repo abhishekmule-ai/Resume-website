@@ -1,32 +1,41 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioContent } from "@/data/content";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { LiveGeometricBackground } from "@/components/ui/live-geometric-background";
 
 export const metadata: Metadata = {
-  title: "Resume",
-  description: portfolioData.seo.description,
-  keywords: portfolioData.seo.keywords,
-  authors: [{ name: portfolioData.personal.name }],
-  creator: portfolioData.personal.name,
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || portfolioData.seo.siteUrl
-  ),
+  title: portfolioContent.seo.title,
+  description: portfolioContent.seo.description,
+  keywords: portfolioContent.seo.keywords,
+  authors: [{ name: portfolioContent.personal.name }],
+  creator: portfolioContent.personal.name,
+  metadataBase: new URL(portfolioContent.seo.siteUrl),
+  alternates: {
+    canonical: portfolioContent.seo.siteUrl,
+  },
   openGraph: {
-    title: "Resume",
-    description: portfolioData.seo.description,
-    url: portfolioData.seo.siteUrl,
-    siteName: `${portfolioData.personal.name} Portfolio`,
+    title: portfolioContent.seo.title,
+    description: portfolioContent.seo.description,
+    url: portfolioContent.seo.siteUrl,
+    siteName: `${portfolioContent.personal.name} Portfolio`,
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: portfolioContent.seo.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${portfolioContent.personal.name} — Blueprint Noir Portfolio`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Resume",
-    description: portfolioData.seo.description,
+    title: portfolioContent.seo.title,
+    description: portfolioContent.seo.description,
+    images: [portfolioContent.seo.ogImage],
   },
   robots: {
     index: true,
@@ -42,6 +51,34 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolioContent.personal.name,
+  url: portfolioContent.seo.siteUrl,
+  jobTitle: "CSE (AI & ML) Student & Web Developer",
+  description: portfolioContent.seo.description,
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "A. P. Shah Institute of Technology, Thane (University of Mumbai)",
+  },
+  knowsAbout: [
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Web Development",
+    "React.js",
+    "Node.js",
+    "Tailwind CSS",
+    "Python",
+    "Video Editing",
+    "Adobe Premiere Pro",
+    "AWS Cloud Computing",
+  ],
+  sameAs: portfolioContent.socialLinks
+    .filter((s) => s.platform !== "Email")
+    .map((s) => s.url),
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,10 +87,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <title>Resume</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -73,20 +110,43 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col relative selection:bg-blue-500/30 selection:text-white">
+      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col relative selection:bg-volt-lime selection:text-ink">
+        {/* Subtle 3.5% Blueprint Noise Grain Overlay */}
+        <div
+          className="fixed inset-0 pointer-events-none noise-overlay z-50 opacity-40 select-none"
+          aria-hidden="true"
+        />
+
+        {/* Hidden Static Form for Netlify Forms Bot Crawler Detection */}
+        <form
+          name="contact"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          hidden
+          aria-hidden="true"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="text" name="name" />
+          <input type="email" name="email" />
+          <input type="text" name="subject" />
+          <textarea name="message"></textarea>
+        </form>
+
         <ThemeProvider>
-          {/* Live 3D geometric background from reference image (non-responsive to cursor) */}
-          <LiveGeometricBackground />
+          {/* Accessible Skip to Content Link with High-Contrast Focus Ring */}
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-lg"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-cobalt text-white font-mono text-sm font-semibold rounded-md border border-volt-lime shadow-cobalt"
           >
             Skip to main content
           </a>
+
           <Navbar />
+
           <main id="main-content" className="flex-1 relative z-10">
             {children}
           </main>
+
           <Footer />
         </ThemeProvider>
       </body>

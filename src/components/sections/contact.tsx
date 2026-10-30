@@ -45,30 +45,34 @@ export function Contact() {
     setErrorMessage("");
 
     try {
-      // Netlify Form Submission
-      const formData = new URLSearchParams();
-      formData.append("form-name", "contact");
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("subject", data.subject);
-      formData.append("message", data.message);
-
-      const response = await fetch("/", {
+      // 1. Submit to API endpoint to store in Database
+      const apiRes = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formData.toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        // Fallback to internal API route if running in local Next.js dev server
-        const apiRes = await fetch("/api/contact", {
+      // 2. Also forward to Netlify Forms as backup
+      try {
+        const formData = new URLSearchParams();
+        formData.append("form-name", "contact");
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("subject", data.subject);
+        formData.append("message", data.message);
+
+        await fetch("/", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: formData.toString(),
         });
-        if (!apiRes.ok) {
-          throw new Error("Unable to transmit message. Please use direct email.");
-        }
+      } catch {
+        // Silently continue if Netlify form is not active in local environment
+      }
+
+      if (!apiRes.ok) {
+        const errJson = await apiRes.json().catch(() => ({}));
+        throw new Error(errJson.error || "Unable to transmit message. Please use direct email.");
       }
 
       setSubmitStatus("success");

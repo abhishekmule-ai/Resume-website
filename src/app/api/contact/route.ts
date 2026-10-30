@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactFormSchema } from "@/lib/validations/contact";
+import { storeContactSubmission } from "@/lib/database";
 
 // Simple in-memory rate limiting map for edge/node runtime
 interface RateLimitEntry {
@@ -58,15 +59,25 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, email, subject, message } = validationResult.data;
+    const userAgent = req.headers.get("user-agent") || undefined;
+    const timestamp = new Date().toISOString();
 
-    // 3. Email Delivery Hook
-    // When RESEND_API_KEY or SMTP credentials are configured, delivery logic executes here.
-    // In local development or placeholder state, we log the message securely to the server console.
-    console.log(`[Contact Form Received]`, {
+    // 3. Store into External Cloud Database (Supabase / Webhook / Local Fallback)
+    const storageResult = await storeContactSubmission({
+      name,
+      email,
+      subject,
+      message,
+      ip,
+      userAgent,
+      createdAt: timestamp,
+    });
+
+    console.log(`[Contact Form Received & Stored]`, {
       from: `${name} <${email}>`,
       subject,
-      length: message.length,
-      timestamp: new Date().toISOString(),
+      provider: storageResult.provider,
+      timestamp,
     });
 
     // 4. Return success response
@@ -74,6 +85,7 @@ export async function POST(req: NextRequest) {
       {
         success: true,
         message: "Message received successfully. Thank you for reaching out!",
+        storage: storageResult,
       },
       { status: 200 }
     );

@@ -117,21 +117,6 @@ export default function RootLayout({
           aria-hidden="true"
         />
 
-        {/* Hidden Static Form for Netlify Forms Bot Crawler Detection */}
-        <form
-          name="contact"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          hidden
-          aria-hidden="true"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <input type="text" name="subject" />
-          <textarea name="message"></textarea>
-        </form>
-
         <ThemeProvider>
           {/* Accessible Skip to Content Link with High-Contrast Focus Ring */}
           <a

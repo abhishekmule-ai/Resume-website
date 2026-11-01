@@ -107,7 +107,7 @@ export const portfolioContent = {
     heroParagraph:
       "Second-year CSE (AI & ML) student at A. P. Shah Institute of Technology. I build clean web apps, cut sharp videos, and volunteer with AWS Cloud Club APSIT. Short résumé, long list of things I'm already building.",
     location: "Mumbai, Maharashtra, India",
-    email: "phosion10@gmail.com",
+    email: "tyariabsesuru@gmail.com",
     profileImage: "/profile.jpg",
     resumeUrl: "/Abhishek_Mule_Resume.pdf",
     portraitLabel: "2ND YEAR · CSE (AI & ML)",
@@ -146,8 +146,8 @@ export const portfolioContent = {
     },
     {
       platform: "Email",
-      url: "mailto:phosion10@gmail.com",
-      username: "phosion10@gmail.com",
+      url: "mailto:tyariabsesuru@gmail.com",
+      username: "tyariabsesuru@gmail.com",
       icon: "Mail",
     },
   ] as SocialLink[],
@@ -182,7 +182,7 @@ export const portfolioContent = {
     overview: {
       location: "Mumbai, Maharashtra, India",
       status: "Open to internships, projects & technology collaborations",
-      email: "phosion10@gmail.com",
+      email: "tyariabsesuru@gmail.com",
     },
     paragraphs: [
       {
@@ -441,7 +441,7 @@ export const portfolioContent = {
     sectionTag: "07 / CONTACT",
     heading: "Got an idea? Let's make it loud.",
     subheading: "Internship, collab, or a project too ambitious for a normal Tuesday: my inbox is open.",
-    email: "phosion10@gmail.com",
+    email: "tyariabsesuru@gmail.com",
     copiedToast: "Email copied. Go write something great.",
     location: "Mumbai, Maharashtra, India",
     mailtoFallbackText: "Or open direct mail client →",

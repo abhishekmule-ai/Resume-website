@@ -58,7 +58,7 @@ async function generateResumePdf() {
 
   y -= 17;
   // Contact row
-  const contactPrefix = 'Mumbai, Maharashtra, India   |   phosion10@gmail.com   |   ';
+  const contactPrefix = 'Mumbai, Maharashtra, India   |   tyariabsesuru@gmail.com   |   ';
   page.drawText(contactPrefix, {
     x: leftMargin,
     y: y,
